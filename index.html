@@ -56,7 +56,7 @@
         var problemsEle = document.getElementsByClassName('problems')[0];
 
         function genrateRandomNumber(max) {
-            return (Math.random() * max)
+            return parseInt(Math.random() * max)
         }
 
         function textToSymbol(text) {
@@ -71,7 +71,7 @@
                     return '+';
                     break;
                 default:
-                    return '/';
+                    return '/'
                     break;
             }
         }
@@ -79,23 +79,38 @@
             // create problem div
             let problemEle = document.createElement('div');
             problemEle.setAttribute('class', 'problem');
+
             // create h3 for number1
             let number1Ele = document.createElement('h3');
             // update value of number1
             number1ELe.innerText = number1;
+
             // create h3 for operation
             let operationEle = document.createElement('h3');
             // update symbol of operation
-            operationELe.innerText = operation;
+            operationELe.innerText = textToSymbol(operation);
+
             // create h3 for number2
             let number2Ele = document.createElement('h3');
             // update value of number2
             number2ELe.innerText = number2;
+
+            // todo ourself create hr
+
             // create input
+            let inputEle = document.createElement('input');
             // update input class name
+            inputEle.setAttribute('class', 'answer');
             // update input class text
+            inputEle.setAttribute('type', 'text');
             // append h3s,input inside problem
+            problemEle.append(number1)
+            problemEle.append(operationEle)
+            problemEle.append(number2Ele)
+            problemEle.append(inputEle)
+
             // Append inside problems
+            problemsEle.append(problemEle);
         }
         var stage1Operation = function () {
             var OperationEle = document.getElementById("operation"),
@@ -108,16 +123,18 @@
             if (operation !== 'divide') {
                 for (let i = 1; i <= 16; i++) {
                     // random no 1
-                    randomNumber1 = genrateRandomNumber(range)
+                    randomNumber1 = genrateRandomNumber(range);
 
                     // random no 2
+                    randomNumber2 = genrateRandomNumber(range);
+                    updateProblem(randomNumber1, randomNumber2, operation);
                 }
             }
 
         }
 
 
-        startEle.addEventListener("click", stage1Operation);
+        startEle.addEventListener('click', stage1Operation);
 
     </script>
 </body>
